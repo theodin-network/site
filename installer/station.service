@@ -1,0 +1,16 @@
+[Unit]
+Description=The Basic Station Gateway Service
+After=network.target
+
+[Service]
+Type=simple
+PIDFile=/var/tmp/station.pid
+ExecStartPre=/usr/local/bin/station-loader.sh
+ExecStart=/usr/local/sbin/station -d -f -h /etc/basicstation -L /var/log/basicstation.log
+SyslogIdentifier=basicstation
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+Alias=basicstation.service
